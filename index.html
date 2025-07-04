@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0">
+    <meta name="description" content="DB Departure Board - Real-time train departures">
+    <title>DB Departure Board</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="departure-board">
+        <!-- Header Section -->
+        <header class="board-header">
+            <div class="station-info">
+                <h1 class="station-name" id="station-name">Frankfurt Hbf</h1>
+            </div>
+            <div class="datetime-info">
+                <time class="current-time" id="current-time">--:--</time>
+                <div class="current-date" id="current-date">--.--.----</div>
+            </div>
+            <div class="company-logo">
+                <img id="company-logo" src="./assets/logo.png" alt="Company Logo">
+            </div>
+        </header>
+
+        <!-- Separator Line -->
+        <div class="separator-line"></div>
+
+        <!-- Table Header -->
+        <div class="table-header">
+            <div class="column-train">ZUG</div>
+            <div class="column-time">ZEIT</div>
+            <div class="column-destination">ZIEL</div>
+            <div class="column-platform">GLEIS</div>
+            <div class="column-status">HINWEISE</div>
+        </div>
+
+        <!-- Separator Line -->
+        <div class="separator-line"></div>
+
+        <!-- Departures Table -->
+        <main class="departures-container" id="departures-container">
+            <!-- Departure rows will be inserted here dynamically -->
+        </main>
+
+        <!-- Footer with Last Updated Info -->
+        <footer class="board-footer">
+            <div class="last-updated" id="last-updated">
+                Zuletzt aktualisiert: --:--
+            </div>
+            <div class="page-indicator" id="page-indicator" style="display: none;">
+                Seite <span id="current-page">1</span> von <span id="total-pages">1</span>
+            </div>
+            <div class="no-departures" id="no-departures" style="display: none;">
+                Keine Abfahrten in den nächsten 5 Stunden
+            </div>
+        </footer>
+    </div>
+
+    <!-- Load main application -->
+    <script type="module" src="dist/main.js"></script>
+</body>
+</html>

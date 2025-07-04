@@ -1,0 +1,9 @@
+station_id: "8000105"
+station_name: "Frankfurt Hbf"
+time_window_hours: 5
+refresh_interval_minutes: 5
+departures_per_page: 12
+page_switch_interval_seconds: 120
+display_language: "de"
+train_types: ["all"]
+company_logo_path: "./assets/logo.png"
