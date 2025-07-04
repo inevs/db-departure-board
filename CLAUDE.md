@@ -57,11 +57,10 @@ company_logo_path: "./assets/logo.png"
 ```
 
 ### Technical Stack
-- Vanilla JavaScript (no frameworks)
+- Typescript
+- npm for package management
 - HTML5/CSS3
 - Deutsche Bahn OpenData API
-- YAML parser for configuration
-- No build process required
 - Must run in Chrome, Firefox, Edge
 
 ### API Integration
@@ -85,16 +84,7 @@ company_logo_path: "./assets/logo.png"
 - Multiple issues: Combine in status column
 
 ## File Structure
-```
-db-departure-board/
-├── index.html
-├── styles.css
-├── app.js
-├── config.yaml
-├── assets/
-│   └── logo.png
-└── README.md
-```
+- domain specific file structure
 
 ## Development Priorities
 1. Basic HTML structure with correct layout
@@ -109,7 +99,6 @@ db-departure-board/
 ## Key Constraints
 - No user interaction (display only)
 - Must be readable from across a lobby
-- 24/7 reliability required
 - Immediate departure removal (no fade out)
 - German railway conventions (time format, terminology)
 
@@ -120,3 +109,6 @@ db-departure-board/
 ## Testing
 - unit test suites with mocking for test isolation
 - e2e tests
+- test first approach
+- small steps
+- ensure all tests are green before git commit
