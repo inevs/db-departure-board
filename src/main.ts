@@ -5,13 +5,11 @@
  * It initializes the application and coordinates between different layers.
  */
 
-// Import domain models (to be created)
-// import { DepartureBoard } from '../domain/DepartureBoard';
-// import { Configuration } from '../domain/Configuration';
+// Import domain models
+import { Configuration } from '../domain/Configuration';
 
-// Import services (to be created)
-// import { ConfigurationService } from '../services/ConfigurationService';
-// import { DBApiService } from '../services/DBApiService';
+// Import services
+import { ConfigurationService, ConfigurationLoadError } from '../services/ConfigurationService';
 
 // Import presentation layer (to be created)
 // import { DepartureBoardRenderer } from '../presentation/DepartureBoardRenderer';
@@ -21,9 +19,12 @@
  */
 class DepartureBoardApp {
     private isInitialized: boolean = false;
+    private configuration: Configuration | null = null;
+    private configurationService: ConfigurationService;
 
     constructor() {
         console.log('DB Departure Board Application Starting...');
+        this.configurationService = ConfigurationService.getInstance();
     }
 
     /**
@@ -33,15 +34,21 @@ class DepartureBoardApp {
         try {
             console.log('Initializing departure board...');
             
-            // For now, just update the time to show the app is working
+            // Step 1: Load and validate configuration
+            await this.loadConfiguration();
+            
+            // Step 2: Update UI with configuration data
+            this.updateUIWithConfiguration();
+            
+            // Step 3: Initialize time display
             this.updateCurrentTime();
             
-            // Start time update interval
+            // Step 4: Start time update interval
             setInterval(() => {
                 this.updateCurrentTime();
             }, 1000);
 
-            // Show initial status
+            // Step 5: Show initial status
             this.showInitialStatus();
 
             this.isInitialized = true;
@@ -49,7 +56,86 @@ class DepartureBoardApp {
             
         } catch (error) {
             console.error('Failed to initialize departure board:', error);
-            this.showError('Fehler beim Initialisieren der Anzeigetafel');
+            this.handleInitializationError(error);
+        }
+    }
+
+    /**
+     * Load and validate configuration
+     */
+    private async loadConfiguration(): Promise<void> {
+        try {
+            console.log('Loading configuration...');
+            this.configuration = await this.configurationService.loadConfiguration();
+            console.log('Configuration loaded:', {
+                station: this.configuration.stationName,
+                refreshInterval: this.configuration.refreshIntervalMinutes,
+                departuresPerPage: this.configuration.departuresPerPage
+            });
+        } catch (error) {
+            if (error instanceof ConfigurationLoadError) {
+                throw error; // Re-throw configuration errors as-is
+            }
+            throw new Error(`Failed to load configuration: ${error}`);
+        }
+    }
+
+    /**
+     * Update UI elements with configuration data
+     */
+    private updateUIWithConfiguration(): void {
+        if (!this.configuration) {
+            throw new Error('Configuration not loaded');
+        }
+
+        // Update station name
+        const stationNameElement = document.getElementById('station-name');
+        if (stationNameElement) {
+            stationNameElement.textContent = this.configuration.stationName;
+        }
+
+        // Update company logo
+        const logoElement = document.getElementById('company-logo') as HTMLImageElement;
+        if (logoElement) {
+            logoElement.src = this.configuration.companyLogoPath;
+            logoElement.onerror = () => {
+                console.warn(`Could not load company logo from: ${this.configuration!.companyLogoPath}`);
+                logoElement.style.display = 'none';
+            };
+        }
+
+        console.log('UI updated with configuration data');
+    }
+
+    /**
+     * Handle initialization errors with user-friendly messages
+     */
+    private handleInitializationError(error: unknown): void {
+        let userMessage: string;
+        let technicalMessage: string;
+
+        if (error instanceof ConfigurationLoadError) {
+            userMessage = 'Konfigurationsfehler - Bitte Administrator kontaktieren';
+            technicalMessage = error.message;
+        } else if (error instanceof Error) {
+            userMessage = 'Initialisierungsfehler - Anwendung kann nicht gestartet werden';
+            technicalMessage = error.message;
+        } else {
+            userMessage = 'Unbekannter Fehler beim Starten der Anwendung';
+            technicalMessage = String(error);
+        }
+
+        // Show user-friendly error
+        this.showError(userMessage);
+
+        // Show technical details in footer for debugging
+        const lastUpdatedElement = document.getElementById('last-updated');
+        if (lastUpdatedElement) {
+            lastUpdatedElement.innerHTML = `
+                <span style="color: #FF0000; font-size: 14px;">
+                    Fehlerdetails: ${technicalMessage}
+                </span>
+            `;
         }
     }
 
@@ -125,7 +211,15 @@ class DepartureBoardApp {
         }
 
         console.log('Departure board application started');
+        console.log('Configuration in use:', this.configuration?.toJSON());
         // Main application logic will be implemented here
+    }
+
+    /**
+     * Get the current configuration (for debugging/testing)
+     */
+    public getConfiguration(): Configuration | null {
+        return this.configuration;
     }
 }
 

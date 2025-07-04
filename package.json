@@ -29,9 +29,13 @@
   },
   "homepage": "https://github.com/inevs/db-departure-board#readme",
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.0.10",
     "http-server": "^14.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
   }
 }
