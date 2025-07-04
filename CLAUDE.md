@@ -22,6 +22,7 @@ Each departure shows:
 - Large, readable monospace font
 
 ### Layout
+
 ```
 [Station Name]          [Date/Time]           [Company Logo]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

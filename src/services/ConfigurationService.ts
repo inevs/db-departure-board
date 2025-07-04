@@ -9,7 +9,7 @@
  */
 
 import * as yaml from 'js-yaml';
-import { Configuration, ConfigurationData, ConfigurationValidationError } from '../domain/Configuration';
+import { Configuration, ConfigurationData, ConfigurationValidationError } from '../domain/Configuration.js';
 
 export class ConfigurationService {
     private static instance: ConfigurationService;
