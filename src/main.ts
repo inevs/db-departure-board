@@ -6,10 +6,10 @@
  */
 
 // Import domain models
-import { Configuration } from '../domain/Configuration';
+import { Configuration } from './domain/Configuration';
 
 // Import services
-import { ConfigurationService, ConfigurationLoadError } from '../services/ConfigurationService';
+import { ConfigurationService, ConfigurationLoadError } from './services/ConfigurationService';
 
 // Import presentation layer (to be created)
 // import { DepartureBoardRenderer } from '../presentation/DepartureBoardRenderer';

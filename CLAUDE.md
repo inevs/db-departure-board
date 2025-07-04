@@ -22,8 +22,6 @@ Each departure shows:
 - Large, readable monospace font
 
 ### Layout
-use @design-mocks/screen.jpg
-
 ```
 [Station Name]          [Date/Time]           [Company Logo]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -85,7 +83,8 @@ company_logo_path: "./assets/logo.png"
 
 ## File Structure
 - domain specific file structure
-
+- TypeScript best practices with a clean, maintainable structure 
+  
 ## Development Priorities
 1. Basic HTML structure with correct layout
 2. CSS for departure board styling
