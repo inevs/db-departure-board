@@ -1,21 +1,34 @@
 # DB Departure Board - Implementation Checklist
 
+## Key Updates from CLAUDE.md
+- **Technology Stack**: Project now uses TypeScript with npm package management
+- **API Integration**: Specific DB OpenData API endpoints defined (`/freeplan/v1/departureBoard/{id}`)
+- **Testing Approach**: Test-first development with comprehensive unit and e2e tests
+- **Clean Architecture**: Domain separation with clear layer boundaries
+- **Visual Specifications**: Exact color codes defined (#000000, #FFBB00, #FF0000)
+- **Configuration**: Complete YAML config specification with all required fields
+- **Browser Support**: Must work in Chrome, Firefox, and Edge
+
 ## Phase 1: Foundation & Structure
+- [ ] Set up TypeScript project with npm package management
+- [ ] Create TypeScript configuration (tsconfig.json)
+- [ ] Set up build system for TypeScript compilation
 - [ ] Create design-mocks/screen.jpg showing the complete departure board layout
 - [ ] Define visual specifications for all UI components
 - [ ] Create mockup showing header layout with station name, date/time, and company logo
 - [ ] Design departure table mockup with proper column alignment and spacing
 - [ ] Create visual samples for different status types (delays, cancellations, platform changes)
 - [ ] Create basic HTML structure with semantic markup
-- [ ] Set up proper DOCTYPE and meta tags for full HD display
+- [ ] Set up proper DOCTYPE and meta tags for full HD display (1920x1080)
 - [ ] Create header section with station name, date/time, and logo placeholders
 - [ ] Build departure table with proper column structure (ZUG, ZEIT, ZIEL, GLEIS, HINWEISE)
 - [ ] Add table separators and borders matching the PRD design
 - [ ] Create basic CSS file with train station styling foundation
 - [ ] Implement black background (#000000) and amber text (#FFBB00) color scheme
+- [ ] Add red color (#FF0000) for delays/issues
 - [ ] Set up monospace font for departure board aesthetic
 - [ ] Design Clean Architecture structure: separate domain logic from technical aspects
-- [ ] Create domain models for Departure, Station, Configuration
+- [ ] Create domain models for Departure, Station, Configuration in TypeScript
 - [ ] Set up service layer for API communication
 - [ ] Create presentation layer for UI rendering
 - [ ] Test basic layout renders correctly in Chrome, Firefox, and Edge
@@ -23,8 +36,8 @@
 - [ ] Validate implementation matches design-mocks/screen.jpg
 
 ## Phase 2: Configuration System
-- [ ] Create config.yaml template with all required settings
-- [ ] Research and implement YAML parsing in vanilla JavaScript
+- [ ] Create config.yaml template with all required settings from CLAUDE.md
+- [ ] Research and implement YAML parsing in TypeScript
 - [ ] Create configuration validation function
 - [ ] Add error handling for missing configuration file
 - [ ] Add error handling for invalid configuration values
@@ -47,13 +60,15 @@
 - [ ] Test rendering with various mock data scenarios
 
 ## Phase 4: API Integration
-- [ ] Research Deutsche Bahn OpenData API endpoints
+- [ ] Research Deutsche Bahn OpenData API endpoints (free tier)
+- [ ] Implement departure board endpoint: `/freeplan/v1/departureBoard/{id}`
+- [ ] Implement station search endpoint: `/freeplan/v1/location/name/{name}`
 - [ ] Implement API authentication/key handling
-- [ ] Create HTTP request function for departure board endpoint
+- [ ] Create HTTP request function for departure board endpoint in TypeScript
 - [ ] Add error handling for API request failures
 - [ ] Implement response parsing and data transformation
 - [ ] Create fallback to cached data when API fails
-- [ ] Add rate limiting handling
+- [ ] Add rate limiting handling gracefully
 - [ ] Implement retry logic for failed requests
 - [ ] Test API integration with real DB data
 - [ ] Verify proper handling of API errors and timeouts
@@ -118,7 +133,8 @@
 - [ ] Test performance over extended periods
 - [ ] Verify no memory leaks during continuous operation
 
-## Phase 10: Integration & Testing
+## Phase 10: Integration & Testing (Test-First Approach)
+- [ ] Set up testing framework for TypeScript project
 - [ ] Create comprehensive unit test suite with mocking for test isolation
 - [ ] Write unit tests for domain models (Departure, Station, Configuration)
 - [ ] Create unit tests for service layer with API mocking
@@ -128,12 +144,13 @@
 - [ ] Test with real DB API using various station IDs
 - [ ] Verify configuration file works with different settings
 - [ ] Test error scenarios and recovery
-- [ ] Perform cross-browser compatibility testing
+- [ ] Perform cross-browser compatibility testing (Chrome, Firefox, Edge)
 - [ ] Create deployment documentation
 - [ ] Write configuration guide for admins
 - [ ] Test full-screen kiosk mode operation
 - [ ] Verify company logo integration works
 - [ ] Final end-to-end testing in production-like environment
+- [ ] Ensure all tests are green before git commit (per CLAUDE.md requirements)
 
 ## Documentation & Deployment
 - [ ] Create README.md with setup instructions
@@ -163,20 +180,23 @@
 ## Project Structure Setup
 - [ ] Create project directory structure following Clean Architecture
 - [ ] Set up version control (Git)
-- [ ] Create basic file structure:
+- [ ] Create basic file structure for TypeScript project:
   - [ ] index.html
   - [ ] styles.css
-  - [ ] app.js
-  - [ ] config.yaml
-  - [ ] assets/ directory
+  - [ ] src/ directory for TypeScript source files
+  - [ ] src/main.ts (entry point)
+  - [ ] config.yaml (matching CLAUDE.md specification)
+  - [ ] assets/ directory for company logo
   - [ ] README.md
+  - [ ] package.json for npm dependencies
+  - [ ] tsconfig.json for TypeScript configuration
   - [ ] tests/ directory for unit and e2e tests
   - [ ] domain/ directory for domain models
   - [ ] services/ directory for API and business logic
   - [ ] presentation/ directory for UI components
-  - [ ] design-mocks/ directory for visual specifications
-- [ ] Initialize project with basic files
-- [ ] Set up development environment
+  - [ ] design-mocks/ directory for visual specifications (including screen.jpg)
+- [ ] Initialize npm project with TypeScript dependencies
+- [ ] Set up development environment with TypeScript compilation
 - [ ] Configure testing framework for unit and e2e tests
 
 ---
